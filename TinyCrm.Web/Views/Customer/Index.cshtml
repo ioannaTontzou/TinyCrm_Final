@@ -1,0 +1,12 @@
+﻿@model List<TinyCrm.Core.Model.Customer>
+
+<ul>
+    @{ 
+        foreach (var customer in Model) {
+    <li>
+        @customer.VatNumber - @customer.Email
+    </li>
+            }
+        }
+
+</ul>

@@ -1,0 +1,68 @@
+﻿@model TinyCrm.Web.Models.CreateCustomerViewModel
+
+<form method="post" action="@Url.Action("create", "customer")">
+
+    <div class="form-group">
+        <label for="@Html.IdFor(c => c.CreateOptions.VatNumber)">Vat Number</label>
+        @Html.TextBoxFor(c => c.CreateOptions.VatNumber, new { @class = "form-control" })
+        <small id="emailHelp" class="form-text text-muted">
+            Vat number should be 9 digits
+        </small>
+    </div>
+
+    <div class="form-group">
+        <label for="@Html.IdFor(c => c.CreateOptions.Email)">Email</label>
+        @Html.TextBoxFor(c => c.CreateOptions.Email, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        <label for="@Html.IdFor(c => c.CreateOptions.FirstName)">Firstname</label>
+        @Html.TextBoxFor(c => c.CreateOptions.FirstName, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        <label for="@Html.IdFor(c => c.CreateOptions.LastName)">Lastname</label>
+        @Html.TextBoxFor(c => c.CreateOptions.LastName, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        <label for="@Html.IdFor(c => c.CreateOptions.Phone)">Phone</label>
+        @Html.TextBoxFor(c => c.CreateOptions.Phone, new { @class = "form-control" })
+        <small id="phoneHelp" class="form-text text-muted">
+            Enter your mobile phone better
+        </small>
+    </div>
+    <div class="form-group">
+
+        @{
+            string[] countries = System.IO.File.ReadAllLines(@"C:\Users\KCA11\devel\kl-oop-tinycrm-master_orm\TinyCrm.Web\bin\countries.csv");
+
+            IEnumerable<SelectListItem> queryCountries =
+            from countryLine in countries
+            let splitProd = countryLine.Split(',')
+            select new SelectListItem()
+            {
+                Text = splitProd[0],
+                Value = splitProd[1]
+            };
+            List<SelectListItem> countriesItem = queryCountries.ToList();
+
+        }
+
+        <label for="@Html.IdFor(c => c.CreateOptions.CountryCode)">Country</label>
+        @Html.DropDownListFor(c => c.CreateOptions.CountryCode, countriesItem,
+      "Select Country", new { @class = "form-control" })
+    </div>
+
+
+
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+    @if (!string.IsNullOrWhiteSpace(Model?.ErrorText)) {
+        <div class="alert alert-danger" role="alert">
+            @Model?.ErrorText
+        </div>
+    } 
+</form>
+

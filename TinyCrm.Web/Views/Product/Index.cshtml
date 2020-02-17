@@ -1,0 +1,12 @@
+﻿@model List<TinyCrm.Core.Model.Product>
+
+<ul>
+    @{ 
+        foreach (var product in Model) {
+    <li>
+        @product.Id -- @product.Description
+    </li>
+            }
+        }
+
+</ul>
