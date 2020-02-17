@@ -16,7 +16,6 @@ namespace TinyCrm.Web.Controllers
             {
                 Name = "Ioanna"
             };
-
             return View(model);
         }
     }

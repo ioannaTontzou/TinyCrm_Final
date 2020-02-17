@@ -37,13 +37,12 @@
 
         <button type="submit" class="btn btn-primary">Search</button>
 
-
-
         @*@if (!string.IsNullOrWhiteSpace(Model?.ErrorText)) {
             <div class="alert alert-danger" role="alert">
                 @Model?.ErrorText
             </div>
         }*@
+
     </form>
 
 @{ if (Model.Products.Count > 0) {
