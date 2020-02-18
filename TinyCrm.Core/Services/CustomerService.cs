@@ -25,27 +25,25 @@ namespace TinyCrm.Core.Services
             if (options == null) {
                 return new ApiResult<Customer>(
                     StatusCodecs.BADREQUEST, "null options"
-                    );
-               
+                    );   
             }
 
             if (string.IsNullOrWhiteSpace(options.VatNumber) ||
               string.IsNullOrWhiteSpace(options.Email)) {
                 return new ApiResult<Customer>(
                     StatusCodecs.BADREQUEST,"null email"
-                    );
-                
+                    );  
             }
 
             if (options.VatNumber.Length > 9) {
                 return new ApiResult<Customer>(
                     StatusCodecs.BADREQUEST, "not valid vatnumber");
-              
             }
+
             if (string.IsNullOrWhiteSpace(options.CountryCode)) {
                 return new ApiResult<Customer>(
                     StatusCodecs.BADREQUEST,"null country");
-               
+   
             }
 
             var exists = await SearchCustomers(
