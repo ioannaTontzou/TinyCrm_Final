@@ -1,0 +1,45 @@
+﻿@model TinyCrm.Web.Models.CreateProductViewModel
+
+
+    <form method="post" action="@Url.Action("create", "product")">
+
+        <div class="form-group">
+            <label for="@Html.IdFor(p => p.CreateOptions.Id)">Product Id</label>
+            @Html.TextBoxFor(p => p.CreateOptions.Id, new { @class = "form-control" })
+            <small id="idHelp" class="form-text text-muted">
+                Id should be 5 digits
+            </small>
+        </div>
+
+        <div class="form-group">
+            <label for="@Html.IdFor(p => p.CreateOptions.Name)">Product Name</label>
+            @Html.TextBoxFor(p => p.CreateOptions.Name, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label for="@Html.IdFor(p => p.CreateOptions.Price)"> Product Price</label>
+            @Html.TextBoxFor(p => p.CreateOptions.Price, new { @class = "form-control" })
+        </div>
+
+
+        <div class="form-group">
+            <label for="@Html.IdFor(p => p.CreateOptions.ProductCategory)"> Product Category </label>
+            @Html.DropDownListFor(p => p.CreateOptions.ProductCategory, new List<SelectListItem>
+            {
+                  new SelectListItem{ Text = "Cameras", Value=$"{TinyCrm.Core.Model.ProductCategory.Cameras}"},
+                  new SelectListItem{ Text = "Laptops", Value=$"{TinyCrm.Core.Model.ProductCategory.Laptops}"},
+                  new SelectListItem{ Text = "Computers", Value=$"{TinyCrm.Core.Model.ProductCategory.Computers}"},
+                  new SelectListItem{ Text = "Smartphone", Value=$"{TinyCrm.Core.Model.ProductCategory.Smartphones}"},
+                  new SelectListItem{ Text = "Television", Value=$"{TinyCrm.Core.Model.ProductCategory.Televisions}"}
+            }, "Select Category", new { @class = "form-control" })
+        </div>
+        
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+        @if (!string.IsNullOrWhiteSpace(Model?.ErrorText)) {
+            <div class="alert alert-danger" role="alert">
+                @Model?.ErrorText
+            </div>
+        }
+    </form>

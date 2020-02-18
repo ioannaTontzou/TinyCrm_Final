@@ -1,0 +1,72 @@
+﻿@model TinyCrm.Web.Models.SearchProductViewModel
+
+
+<form method="post" action="@Url.Action("search", "product")">
+
+    <div class="form-group">
+        <label for="@Html.IdFor(c => c.SearchOptions.Id)">Product Id</label>
+        @Html.TextBoxFor(c => c.SearchOptions.Id, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        <label for="@Html.IdFor(c => c.SearchOptions.Name)">Product Name</label>
+        @Html.TextBoxFor(c => c.SearchOptions.Name, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        <label for="@Html.IdFor(c => c.SearchOptions.Description)">Product Description</label>
+        @Html.TextBoxFor(c => c.SearchOptions.Description, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        <label for="@Html.IdFor(p => p.SearchOptions.Category)"> Product Category </label>
+        @Html.DropDownListFor(p => p.SearchOptions.Category, new List<SelectListItem>
+        {
+              new SelectListItem{ Text = "Cameras", Value=$"{TinyCrm.Core.Model.ProductCategory.Cameras}"},
+              new SelectListItem{ Text = "Laptops", Value=$"{TinyCrm.Core.Model.ProductCategory.Laptops}"},
+              new SelectListItem{ Text = "Computers", Value=$"{TinyCrm.Core.Model.ProductCategory.Computers}"},
+              new SelectListItem{ Text = "Smartphone", Value=$"{TinyCrm.Core.Model.ProductCategory.Smartphones}"},
+              new SelectListItem{ Text = "Television", Value=$"{TinyCrm.Core.Model.ProductCategory.Televisions}"}
+        }, "Select Category", new { @class = "form-control" })
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Search</button>
+
+</form>
+
+@{ if (Model.Products.Count > 0) {
+     <table class="table table-bordered">
+        <thead>
+          <tr>
+           <th scope="col">ID</th>
+           <th scope="col">Name</th>
+           <th scope="col">Price</th>
+           <th scope="col">Discount</th>
+           <th scope="col">Category</th>
+          </tr>
+        </thead>
+          <tbody>
+             @{
+                var counter = 0;
+                 foreach (var product in Model.Products) {
+                   <tr>
+                    <td>@product.Id</td>
+                    <td>@product.Name</td>
+                    <td>@product.Price</td>
+                    <td>@product.Discount</td>
+                    <td>@product.Category</td>
+                   </tr>
+
+                        counter++;
+                 }
+               }
+                
+          </tbody>
+     </table>
+
+        <div class="alert alert-success" role="alert">
+            Total Result Found : @counter
+        </div>
+   }
+}                
