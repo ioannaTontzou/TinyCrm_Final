@@ -36,7 +36,12 @@ namespace TinyCrm.Core
                .InstancePerLifetimeScope()
                .AsSelf();
 
-            
+            builder
+               .RegisterType<LoggerService>()
+               .InstancePerLifetimeScope()
+               .As<ILoggerService>();
+
+
         }
 
         public static IContainer CreateContainer()
