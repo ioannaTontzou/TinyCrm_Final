@@ -11,7 +11,7 @@ namespace TinyCrm.Model
         /// <summary>
         /// 
         /// </summary>
-        Cansel = 0,
+        Cancel = 0,
 
         /// <summary>
         /// 
